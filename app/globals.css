@@ -107,3 +107,73 @@
   background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Additional gradient utilities for mascot animations */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Enhanced animation keyframes */
+@keyframes float-bounce {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(-1deg);
+  }
+}
+
+@keyframes speed-lines {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+}
+
+@keyframes wind-effect {
+  0% {
+    transform: translateX(50px) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(-150px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-float-bounce {
+  animation: float-bounce 2s ease-in-out infinite;
+}
+
+.animate-speed-lines {
+  animation: speed-lines 1.5s ease-out infinite;
+}
+
+.animate-wind-effect {
+  animation: wind-effect 2s ease-out infinite;
+}
+
+/* Smooth transitions for all animations */
+* {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+}
