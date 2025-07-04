@@ -1,9 +1,8 @@
-import { config } from "@/lib/config";
-import { AI_AGENT_SYSTEM_PROMT } from "@/lib/constant";
+import { AI_AGENT_SYSTEM_PROMT, GEMINI_API_URL } from "@/lib/constant";
 import { CompanyInfo } from "@/types/CompanyInfo";
 import axios from "axios";
 
-export async function getCompanyInfoGemini(input: string): Promise<CompanyInfo | CompanyInfo[]> {
+export async function getCompanyInfoGemini(input: string,type: string): Promise<CompanyInfo | CompanyInfo[]> {
   const payload = {
     contents: [
       {
@@ -15,7 +14,7 @@ export async function getCompanyInfoGemini(input: string): Promise<CompanyInfo |
     ]
   };
 
-  const res = await axios.post(config.GEMINI_API_KEY, payload, {
+  const res = await axios.post(GEMINI_API_URL, payload, {
     headers: {
       "Content-Type": "application/json"
     }
@@ -30,6 +29,6 @@ export async function getCompanyInfoGemini(input: string): Promise<CompanyInfo |
 
   // Remove markdown formatting if present
   const cleanText = text.replace(/^```json\n?|\n?```$/g, "").trim();
-
+  console.log(`company info: ${JSON.parse(cleanText)}`);
   return JSON.parse(cleanText);
 }

@@ -1,4 +1,3 @@
-import "dotenv/config";
 import z from "zod";
 import { parseEnv, port } from "znv";
 
