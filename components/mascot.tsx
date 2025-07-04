@@ -5,7 +5,7 @@ import Image from "next/image"
 
 export function Mascot() {
   return (
-    <div className="relative w-96 h-96 flex items-center justify-center">
+    <div className="relative w-85 h-85 flex items-center justify-center">
       {/* Wind Effect Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Speed Lines */}
@@ -128,7 +128,7 @@ export function Mascot() {
             className="relative w-80 h-80"
           >
             <Image
-              height={8000}
+              height={800}
               width={500}
               src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751635087/4ae860ae-19f0-4a52-9278-755252a685ed_o8fv7y.jpg"
               alt="WebScraper Pro Mascot - Super Hero"
