@@ -9,6 +9,7 @@ const createConfigFromEnvironment = (environment: NodeJS.ProcessEnv) => {
     MONGODB_URI: z.string().url(),
     NEXTAUTH_URL: z.string().url(),
     NEXTAUTH_SECRET: z.string(),
+    GEMINI_API_KEY: z.string(),
     // Add more as needed
     NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
     PORT: port().default(3000),
