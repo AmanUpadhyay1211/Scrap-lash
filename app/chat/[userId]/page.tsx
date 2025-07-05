@@ -9,7 +9,6 @@ import {
   Plus, 
   MessageSquare, 
   Sparkles,
-  Bot,
   ArrowLeft,
   Loader2,
   CreditCard,
@@ -25,6 +24,7 @@ import {
   deleteChat
 } from "@/lib/redux/slices/chatSlice"
 import { AppDispatch, RootState } from "@/lib/redux/store"
+import Image from "next/image"
 
 export default function ChatHistoryPage() {
   const params = useParams()
@@ -91,9 +91,9 @@ export default function ChatHistoryPage() {
 
   if (!user || userId !== user.id) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen px-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-2">Access Denied</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-2">Access Denied</h2>
           <p className="text-muted-foreground">You can only access your own chats.</p>
         </div>
       </div>
@@ -104,8 +104,8 @@ export default function ChatHistoryPage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b bg-card/50 backdrop-blur">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4 md:py-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
@@ -113,26 +113,26 @@ export default function ChatHistoryPage() {
                 onClick={() => router.push('/')}
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
+                <span className="hidden sm:inline">Back</span>
               </Button>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   AI Chat History
                 </h1>
-                <p className="text-muted-foreground mt-1">
+                <p className="text-muted-foreground mt-1 text-sm md:text-base">
                   Continue your conversations with AI insights
                 </p>
               </div>
             </div>
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 md:gap-4">
               {/* Credits Display */}
               <Card className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/20">
-                <CardContent className="p-3">
+                <CardContent className="p-2 md:p-3">
                   <div className="flex items-center gap-2">
                     <CreditCard className="w-4 h-4 text-green-600" />
-                    <span className="text-sm font-medium">Credits</span>
-                    <Badge variant="secondary" className="bg-green-500/20 text-green-700">
+                    <span className="text-xs md:text-sm font-medium">Credits</span>
+                    <Badge variant="secondary" className="bg-green-500/20 text-green-700 text-xs">
                       {userData?.credits || 0}
                     </Badge>
                   </div>
@@ -142,14 +142,15 @@ export default function ChatHistoryPage() {
               <Button 
                 onClick={handleNewChat} 
                 disabled={isCreating}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white text-sm"
               >
                 {isCreating ? (
                   <Loader2 className="w-4 h-4 animate-spin mr-2" />
                 ) : (
                   <Plus className="w-4 h-4 mr-2" />
                 )}
-                New Chat
+                <span className="hidden sm:inline">New Chat</span>
+                <span className="sm:hidden">New</span>
               </Button>
             </div>
           </div>
@@ -157,7 +158,7 @@ export default function ChatHistoryPage() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
         {loading ? (
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
@@ -166,16 +167,23 @@ export default function ChatHistoryPage() {
             </div>
           </div>
         ) : chats.length === 0 ? (
-          <div className="text-center py-16">
+          <div className="text-center py-8 md:py-16">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full flex items-center justify-center"
+              className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full flex items-center justify-center"
             >
-              <Bot className="w-12 h-12 text-purple-600" />
+              <div className="relative w-12 h-12 md:w-16 md:h-16">
+                <Image
+                  src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751635087/4ae860ae-19f0-4a52-9278-755252a685ed_o8fv7y.jpg"
+                  alt="Scrap⚡lash Mascot"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </motion.div>
-            <h3 className="text-2xl font-semibold mb-2">No chats yet</h3>
-            <p className="text-muted-foreground mb-6">
+            <h3 className="text-xl md:text-2xl font-semibold mb-2">No chats yet</h3>
+            <p className="text-muted-foreground mb-6 text-sm md:text-base">
               Start your first AI conversation to get insights about companies
             </p>
             <Button 
@@ -192,7 +200,7 @@ export default function ChatHistoryPage() {
             </Button>
           </div>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence>
               {chats.map((chat, index) => (
                 <motion.div
@@ -203,18 +211,18 @@ export default function ChatHistoryPage() {
                   transition={{ delay: index * 0.1 }}
                 >
                   <Card 
-                    className="cursor-pointer transition-all hover:shadow-lg hover:scale-105 border-0 bg-card/50 backdrop-blur"
+                    className="cursor-pointer transition-all hover:shadow-lg hover:scale-105 border-0 bg-card/50 backdrop-blur group"
                     onClick={() => router.push(`/chat/${user.id}/${chat._id}`)}
                   >
-                    <CardContent className="p-6">
+                    <CardContent className="p-4 md:p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                            <MessageSquare className="w-5 h-5 text-white" />
+                          <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                            <MessageSquare className="w-4 h-4 md:w-5 md:h-5 text-white" />
                           </div>
-                          <div>
-                            <h3 className="font-semibold text-lg">{chat.title}</h3>
-                            <p className="text-sm text-muted-foreground">
+                          <div className="min-w-0 flex-1">
+                            <h3 className="font-semibold text-base md:text-lg truncate">{chat.title}</h3>
+                            <p className="text-xs md:text-sm text-muted-foreground">
                               {chat.messages.length} messages
                             </p>
                           </div>
@@ -233,11 +241,11 @@ export default function ChatHistoryPage() {
                       </div>
                       
                       <div className="space-y-2">
-                        <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center justify-between text-xs md:text-sm">
                           <span className="text-muted-foreground">Created</span>
                           <span>{formatDate(chat.createdAt)}</span>
                         </div>
-                        <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center justify-between text-xs md:text-sm">
                           <span className="text-muted-foreground">Last updated</span>
                           <span>{formatTime(chat.updatedAt)}</span>
                         </div>
@@ -245,7 +253,7 @@ export default function ChatHistoryPage() {
 
                       {chat.messages.length > 0 && (
                         <div className="mt-4 pt-4 border-t">
-                          <p className="text-sm text-muted-foreground line-clamp-2">
+                          <p className="text-xs md:text-sm text-muted-foreground line-clamp-2">
                             {chat.messages[chat.messages.length - 1]?.content || 'No messages yet'}
                           </p>
                         </div>

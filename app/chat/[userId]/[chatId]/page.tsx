@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   Send, 
-  Bot, 
   User, 
   Plus, 
   Trash2, 
@@ -15,11 +14,12 @@ import {
   Sparkles,
   ArrowLeft,
   Loader2,
-  CreditCard
+  CreditCard,
+  Home
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
@@ -34,6 +34,8 @@ import { AppDispatch, RootState } from "@/lib/redux/store"
 import { Message } from "@/types/Chat"
 import Link from "next/link"
 import { fetchUserData } from "@/lib/redux/slices/userSlice"
+import Image from "next/image"
+import { useTheme } from "next-themes"
 
 export default function ChatPage() {
   const params = useParams()
@@ -44,6 +46,8 @@ export default function ChatPage() {
   const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { resolvedTheme } = useTheme?.() || { resolvedTheme: 'light' }
 
   const { chats, activeChat, loading, sendingMessage, error } = useSelector(
     (state: RootState) => state.chat
@@ -151,33 +155,54 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-screen bg-background">
-      {/* Sidebar */}
-      <motion.div 
+      {/* Mobile Sidebar Toggle */}
+      <div className="md:hidden fixed top-4 left-4 z-50">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="bg-background/80 backdrop-blur"
+        >
+          <MessageSquare className="w-4 h-4" />
+        </Button>
+      </div>
+      {/* Sidebar Drawer for Mobile, Static for Desktop */}
+      <motion.div
         initial={{ x: -300 }}
-        animate={{ x: 0 }}
-        className="w-80 border-r bg-card/50 backdrop-blur"
+        animate={{ x: sidebarOpen || typeof window !== 'undefined' && window.innerWidth >= 768 ? 0 : -300 }}
+        className={`fixed md:relative z-40 w-72 md:w-80 h-full border-r bg-card/50 backdrop-blur transition-transform duration-300 ${sidebarOpen ? 'block' : 'hidden md:block'}`}
       >
         <div className="p-4 border-b">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
+              {/* Close button for mobile */}
+              <button
+                type="button"
+                className="md:hidden p-2 rounded hover:bg-accent focus:outline-none focus:ring-2 focus:ring-primary"
+                onClick={() => setSidebarOpen(false)}
+                aria-label="Close sidebar"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              {/* Home button always visible */}
               <Link href="/">
-                <Button variant="ghost" size="icon" className="mr-2">
-                  {/* Home icon */}
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l9-9m0 0l9 9m-9-9v18" />
-                  </svg>
+                <Button variant="ghost" size="icon" className="mr-1">
+                  <Home className="w-5 h-5" />
                 </Button>
               </Link>
+              {/* Single chat icon and title */}
               <h2 className="text-lg font-semibold flex items-center gap-2">
                 <MessageSquare className="w-5 h-5" />
-                AI Chats
+                <span className="hidden sm:inline">AI Chats</span>
+                <span className="sm:hidden">Chats</span>
               </h2>
             </div>
             <Button onClick={handleNewChat} size="sm" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
               <Plus className="w-4 h-4" />
             </Button>
           </div>
-          
           {/* Credits Display */}
           <Card className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/20">
             <CardContent className="p-3">
@@ -193,7 +218,6 @@ export default function ChatPage() {
             </CardContent>
           </Card>
         </div>
-
         <ScrollArea className="h-[calc(100vh-140px)]">
           <div className="p-2">
             <AnimatePresence>
@@ -205,21 +229,18 @@ export default function ChatPage() {
                   exit={{ opacity: 0, y: -20 }}
                   className="mb-2"
                 >
-                  <Card 
-                    className={`cursor-pointer transition-all hover:shadow-md ${
-                      activeChat?._id === chat._id 
-                        ? 'ring-2 ring-primary bg-primary/5' 
-                        : 'hover:bg-accent/50'
-                    }`}
-                    onClick={() => router.push(`/chat/${user.id}/${chat._id}`)}
+                  <Card
+                    className={`cursor-pointer transition-all hover:shadow-md ${activeChat?._id === chat._id ? 'ring-2 ring-primary bg-primary/5' : 'hover:bg-accent/50'}`}
+                    onClick={() => {
+                      router.push(`/chat/${user.id}/${chat._id}`)
+                      setSidebarOpen(false)
+                    }}
                   >
                     <CardContent className="p-3">
                       <div className="flex items-start justify-between">
                         <div className="flex-1 min-w-0">
                           <h3 className="font-medium text-sm truncate">{chat.title}</h3>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {formatDate(chat.updatedAt)}
-                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">{formatDate(chat.updatedAt)}</p>
                         </div>
                         <Button
                           variant="ghost"
@@ -241,9 +262,12 @@ export default function ChatPage() {
           </div>
         </ScrollArea>
       </motion.div>
-
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 bg-black/20 z-30 md:hidden" onClick={() => setSidebarOpen(false)} />
+      )}
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Chat Header */}
         <div className="border-b bg-card/50 backdrop-blur p-4">
           <div className="flex items-center justify-between">
@@ -254,28 +278,24 @@ export default function ChatPage() {
                 onClick={() => router.push('/')}
                 className="md:hidden"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <Home className="w-4 h-4" />
               </Button>
               <div>
-                <h1 className="text-lg font-semibold">
-                  {activeChat?.title || "New Chat"}
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  {activeChat?.messages.length || 0} messages
-                </p>
+                <h1 className="text-base md:text-lg font-semibold truncate max-w-[60vw]">{activeChat?.title || "New Chat"}</h1>
+                <p className="text-xs md:text-sm text-muted-foreground">{activeChat?.messages.length || 0} messages</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="outline" className="bg-green-500/10 text-green-700">
+              <Badge variant="outline" className="bg-green-500/10 text-green-700 text-xs md:text-sm">
                 <Sparkles className="w-3 h-3 mr-1" />
-                AI Powered
+                <span className="hidden sm:inline">AI Powered</span>
+                <span className="sm:hidden">AI</span>
               </Badge>
             </div>
           </div>
         </div>
-
         {/* Messages Area */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden min-h-0">
           {loading ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
@@ -284,7 +304,7 @@ export default function ChatPage() {
               </div>
             </div>
           ) : activeChat ? (
-            <ScrollArea className="h-full p-4">
+            <ScrollArea className="h-full p-2 md:p-4">
               <div className="space-y-4">
                 <AnimatePresence>
                   {activeChat.messages.map((msg: Message, index: number) => (
@@ -295,46 +315,45 @@ export default function ChatPage() {
                       exit={{ opacity: 0, y: -20 }}
                       className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      <div className={`flex items-start gap-3 max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                          msg.role === 'user' 
-                            ? 'bg-primary text-primary-foreground' 
-                            : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
-                        }`}>
+                      <div className={`flex items-end gap-2 max-w-[95%] sm:max-w-[85%] md:max-w-[70%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700'}`}>
                           {msg.role === 'user' ? (
                             <User className="w-4 h-4" />
                           ) : (
-                            <Bot className="w-4 h-4" />
+                            <Image
+                              src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                              alt="AI Bot Mascot"
+                              width={24}
+                              height={24}
+                              className="object-contain rounded-full bg-white dark:bg-neutral-900 p-0.5"
+                            />
                           )}
                         </div>
-                        <div className={`rounded-lg p-3 ${
-                          msg.role === 'user'
-                            ? 'bg-primary text-primary-foreground'
-                            : 'bg-muted'
-                        }`}>
-                          <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
-                          <p className={`text-xs mt-1 ${
-                            msg.role === 'user' ? 'text-primary-foreground/70' : 'text-muted-foreground'
-                          }`}>
-                            {formatTime(msg.timestamp)}
-                          </p>
+                        <div className={`rounded-lg px-3 py-2 break-words ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted dark:bg-neutral-900 text-foreground'} shadow-sm w-full`}>
+                          <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
+                          <p className={`text-xs mt-1 ${msg.role === 'user' ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>{formatTime(msg.timestamp)}</p>
                         </div>
                       </div>
                     </motion.div>
                   ))}
                 </AnimatePresence>
-                
                 {isTyping && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="flex justify-start"
                   >
-                    <div className="flex items-start gap-3 max-w-[80%]">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white flex items-center justify-center">
-                        <Bot className="w-4 h-4" />
+                    <div className="flex items-end gap-2 max-w-[95%] sm:max-w-[85%] md:max-w-[70%]">
+                      <div className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center">
+                        <Image
+                          src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                          alt="AI Bot Mascot"
+                          width={24}
+                          height={24}
+                          className="object-contain rounded-full bg-white dark:bg-neutral-900 p-0.5"
+                        />
                       </div>
-                      <div className="bg-muted rounded-lg p-3">
+                      <div className="bg-muted dark:bg-neutral-900 rounded-lg px-3 py-2">
                         <div className="flex items-center gap-1">
                           <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
                           <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
@@ -344,36 +363,41 @@ export default function ChatPage() {
                     </div>
                   </motion.div>
                 )}
-                
                 <div ref={messagesEndRef} />
               </div>
             </ScrollArea>
           ) : (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
-                <Bot className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+                <div className="relative w-12 h-12 mx-auto mb-4">
+                  <Image
+                    src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                    alt="AI Bot Mascot"
+                    fill
+                    className="object-contain rounded-full bg-white dark:bg-neutral-900 p-1 border border-neutral-200 dark:border-neutral-700"
+                  />
+                </div>
                 <h3 className="text-lg font-semibold mb-2">No Chat Selected</h3>
-                <p className="text-muted-foreground">Select a chat from the sidebar or create a new one.</p>
+                <p className="text-muted-foreground text-sm">Select a chat from the sidebar or create a new one.</p>
               </div>
             </div>
           )}
         </div>
-
         {/* Message Input */}
         {activeChat && (
-          <div className="border-t bg-card/50 backdrop-blur p-4">
-            <div className="flex items-center gap-3">
+          <div className="border-t bg-card/50 backdrop-blur p-2 md:p-4">
+            <div className="flex items-center gap-2 md:gap-3">
               <Input
                 ref={inputRef}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1"
+                className="flex-1 text-sm md:text-base"
                 disabled={sendingMessage}
               />
-              <Button 
-                onClick={handleSendMessage} 
+              <Button
+                onClick={handleSendMessage}
                 disabled={!message.trim() || sendingMessage}
                 className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
               >
