@@ -9,13 +9,13 @@ import { ReduxProvider } from "@/lib/redux/provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "WebScraper Pro - AI-Powered Company Data Extraction",
+  title: "Scrap⚡Flash - AI-Powered Company Data Extraction",
   description:
     "Transform any company name, URL, or search query into comprehensive business intelligence. Get contact information, tech stack details, and competitive insights instantly.",
   keywords: "web scraping, company data, business intelligence, contact extraction, tech stack analysis",
-  authors: [{ name: "WebScraper Pro Team" }],
+  authors: [{ name: "Aman Upadhyay" }],
   openGraph: {
-    title: "WebScraper Pro - AI-Powered Company Data Extraction",
+    title: "Scrap⚡Flash - AI-Powered Company Data Extraction",
     description: "Transform any company name, URL, or search query into comprehensive business intelligence.",
     type: "website",
   },

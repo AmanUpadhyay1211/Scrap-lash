@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png" alt="Scrap⚡Flash Logo" width="200" height="200" style="border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" />
+  <img src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png" alt="Scrap⚡lash Logo" width="200" height="200" style="border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" />
   
-  # Scrap⚡Flash
+  # Scrap⚡lash
   
   **Lightning-fast web scraping with AI-powered insights**
   
@@ -414,7 +414,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  <p>Made with ⚡ by the Scrap⚡Flash team</p>
+  <p>Made with ⚡ by the Scrap⚡lash team</p>
   <p>
     <a href="https://scrapflash.com">Website</a> •
     <a href="https://twitter.com/scrapflash">Twitter</a> •

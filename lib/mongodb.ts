@@ -31,7 +31,7 @@ if (config.NODE_ENV === "development") {
 
 export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db }> {
   const client = await clientPromise
-  const db = client.db("webscraperpro")
+  const db = client.db("scraplash")
   return { client, db }
 }
 

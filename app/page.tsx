@@ -82,7 +82,7 @@ const testimonials = [
     role: "Marketing Director",
     company: "TechCorp",
     content:
-      "WebScraper Pro has revolutionized how we gather competitive intelligence. The accuracy and speed are unmatched.",
+      "Scrap⚡lash has revolutionized how we gather competitive intelligence. The accuracy and speed are unmatched.",
     rating: 5,
   },
   {
@@ -169,7 +169,7 @@ export default function LandingPage() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose WebScraper Pro?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose Scrap⚡lash?</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Powerful features designed to make web scraping simple, fast, and reliable for businesses of all sizes.
           </p>
@@ -273,7 +273,7 @@ export default function LandingPage() {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">What Our Customers Say</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust WebScraper Pro for their data extraction needs.
+            Join thousands of satisfied customers who trust Scrap⚡lash for their data extraction needs.
           </p>
         </motion.div>
 
@@ -320,7 +320,7 @@ export default function LandingPage() {
             <CardContent className="pt-12 pb-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Get Started?</h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join thousands of businesses already using WebScraper Pro to extract valuable company data and gain
+                Join thousands of businesses already using Scrap⚡lash to extract valuable company data and gain
                 competitive advantages.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

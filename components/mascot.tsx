@@ -131,7 +131,7 @@ export function Mascot() {
               height={800}
               width={500}
               src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751635087/4ae860ae-19f0-4a52-9278-755252a685ed_o8fv7y.jpg"
-              alt="WebScraper Pro Mascot - Super Hero"
+              alt="Scrap⚡lash Mascot - Super Hero"
               // fill
               className="object-contain drop-shadow-2xl"
               priority

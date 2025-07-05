@@ -61,7 +61,7 @@ export default function ContactPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Have questions about WebScraper Pro? We're here to help! Reach out to our team for support, feedback, or
+            Have questions about Scrap⚡lash? We're here to help! Reach out to our team for support, feedback, or
             partnership opportunities.
           </p>
         </motion.div>

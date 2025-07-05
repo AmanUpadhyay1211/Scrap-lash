@@ -55,7 +55,7 @@ export function Footer() {
                   <Zap className="w-4 h-4 text-primary-foreground" />
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                  WebScraper Pro
+                  Scrap⚡lash
                 </span>
               </Link>
               <p className="text-muted-foreground mb-6 max-w-sm">
@@ -115,7 +115,7 @@ export function Footer() {
           viewport={{ once: true }}
           className="border-t pt-8 mt-12 flex flex-col md:flex-row justify-between items-center gap-4"
         >
-          <p className="text-sm text-muted-foreground">© 2024 WebScraper Pro. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">© 2024 Scrap⚡lash. All rights reserved.</p>
 
           {/* Social Links */}
           <div className="flex items-center gap-4">
