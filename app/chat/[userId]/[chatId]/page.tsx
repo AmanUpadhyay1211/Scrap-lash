@@ -32,6 +32,8 @@ import {
 } from "@/lib/redux/slices/chatSlice"
 import { AppDispatch, RootState } from "@/lib/redux/store"
 import { Message } from "@/types/Chat"
+import Link from "next/link"
+import { fetchUserData } from "@/lib/redux/slices/userSlice"
 
 export default function ChatPage() {
   const params = useParams()
@@ -79,6 +81,7 @@ export default function ChatPage() {
         message: message.trim()
       })).unwrap()
       setMessage("")
+      await dispatch(fetchUserData(user.id))
     } catch (error) {
       console.error('Failed to send message:', error)
     } finally {
@@ -156,10 +159,20 @@ export default function ChatPage() {
       >
         <div className="p-4 border-b">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <MessageSquare className="w-5 h-5" />
-              AI Chats
-            </h2>
+            <div className="flex items-center gap-2">
+              <Link href="/">
+                <Button variant="ghost" size="icon" className="mr-2">
+                  {/* Home icon */}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l9-9m0 0l9 9m-9-9v18" />
+                  </svg>
+                </Button>
+              </Link>
+              <h2 className="text-lg font-semibold flex items-center gap-2">
+                <MessageSquare className="w-5 h-5" />
+                AI Chats
+              </h2>
+            </div>
             <Button onClick={handleNewChat} size="sm" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
               <Plus className="w-4 h-4" />
             </Button>

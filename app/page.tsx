@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { ArrowRight, CheckCircle, Star, Zap, Shield, BarChart3, Globe, Users } from "lucide-react"
+import { ArrowRight, CheckCircle, Star, Shield, BarChart3, Globe, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -15,9 +15,15 @@ import { Mascot } from "@/components/mascot"
 
 const features = [
   {
-    icon: Zap,
-    title: "Lightning Fast",
-    description: "Extract company data in seconds with our AI-powered scraping engine.",
+    icon: () => (
+      <img
+        src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+        alt="ScrapFlash Logo"
+        className="w-5 h-5 object-contain"
+      />
+    ),
+    title: "Lightning Fast Scraping",
+    description: "Scrape company data in seconds with our AI-powered engine.",
   },
   {
     icon: Shield,
@@ -120,7 +126,11 @@ export default function LandingPage() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
             <Badge variant="secondary" className="mb-4">
-              <Zap className="w-3 h-3 mr-1" />
+              <img
+                src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                alt="ScrapFlash Logo"
+                className="w-3 h-3 mr-1 object-contain"
+              />
               AI-Powered Web Scraping
             </Badge>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -187,7 +197,11 @@ export default function LandingPage() {
               <Card className="h-full border-0 bg-card/50 backdrop-blur hover:bg-card/80 transition-all duration-300 hover:shadow-lg">
                 <CardHeader>
                   <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-lg flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-primary-foreground" />
+                    <img
+                      src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                      alt="ScrapFlash Logo"
+                      className="w-6 h-6 object-contain"
+                    />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
                 </CardHeader>

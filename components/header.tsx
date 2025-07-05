@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
-import { Zap, Menu, X, Bot, Sparkles } from "lucide-react"
+import { Menu, X, Bot, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs"
@@ -35,12 +35,16 @@ export function Header() {
           <Link href="/" className="flex items-center space-x-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="w-8 h-8 bg-gradient-to-br from-primary to-primary/60 rounded-lg flex items-center justify-center"
+              className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/0"
             >
-              <Zap className="w-4 h-4 text-primary-foreground" />
+              <img
+                src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                alt="ScrapFlash Logo"
+                className="w-8 h-8 object-contain"
+              />
             </motion.div>
             <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              Scrap⚡lash
+              WebScraper Pro
             </span>
           </Link>
 
