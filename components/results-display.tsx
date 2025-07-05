@@ -9,7 +9,7 @@ import { ScrapeRouteResponse } from "@/types/ScrapeRouteResponse"
 import { useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 import { useDispatch } from "react-redux"
-import { createNewChat } from "@/lib/redux/slices/chatSlice"
+import { createNewChat, sendMessage } from "@/lib/redux/slices/chatSlice"
 import { AppDispatch } from "@/lib/redux/store"
 
 interface ResultsDisplayProps {
@@ -21,17 +21,30 @@ export function ResultsDisplay({ results }: ResultsDisplayProps) {
   const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
 
-  const handleAIInsight = async () => {
+  const handleAIInsight = async (company: any) => {
     if (!user || !results.success) return
     
     try {
+      const companyName = company.name || 'Unknown Company'
+      const foundedInfo = company.founded ? ` founded in ${company.founded}` : ''
+      const industryInfo = company.industry ? ` in the ${company.industry} industry` : ''
+      
+      const initialPrompt = `Give me a detailed analysis of ${companyName}${foundedInfo}${industryInfo}. Please provide insights about their business model, market position, growth potential, and any other relevant information based on the available data.`
+      
       const result = await dispatch(createNewChat({
         userId: user.id,
-        title: `AI Analysis - ${new Date().toLocaleDateString()}`,
-        scrapeData: results.data
+        title: `AI Analysis - ${companyName}`,
+        scrapeData: company
       })).unwrap()
       
       if (result.success && result.data) {
+        // Add the initial prompt as the first message
+        await dispatch(sendMessage({
+          chatId: result.data._id as string,
+          userId: user.id,
+          message: initialPrompt
+        }))
+        
         router.push(`/chat/${user.id}/${result.data._id}`)
       }
     } catch (error) {
@@ -107,16 +120,10 @@ export function ResultsDisplay({ results }: ResultsDisplayProps) {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Button onClick={handleAIInsight} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0">
-                <Sparkles className="w-4 h-4 mr-2" />
-                AI Insight
-              </Button>
-              <Button onClick={() => exportToCSV(companies)} variant="outline" size="sm">
-                <Download className="w-4 h-4 mr-2" />
-                Export CSV
-              </Button>
-            </div>
+            <Button onClick={() => exportToCSV(companies)} variant="outline" size="sm">
+              <Download className="w-4 h-4 mr-2" />
+              Export CSV
+            </Button>
           </div>
         </CardContent>
       </Card>
@@ -345,6 +352,17 @@ export function ResultsDisplay({ results }: ResultsDisplayProps) {
                       </div>
                     )}
                   </div>
+                </div>
+                
+                {/* AI Insight Button */}
+                <div className="mt-6 pt-6 border-t">
+                  <Button 
+                    onClick={() => handleAIInsight(company)} 
+                    className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Get AI Insight for {company.name}
+                  </Button>
                 </div>
               </CardContent>
             </Card>

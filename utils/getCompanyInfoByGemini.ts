@@ -1,14 +1,14 @@
-import { AI_AGENT_SYSTEM_PROMT, GEMINI_API_URL } from "@/lib/constant";
+import { AI_AGENT_SYSTEM_PROMT, CHAT_BOT_SYSTEM_PROMT, GEMINI_API_URL } from "@/lib/constant";
 import { CompanyInfo } from "@/types/CompanyInfo";
 import axios from "axios";
 
-export async function getCompanyInfoGemini(input: string,type: string): Promise<CompanyInfo | CompanyInfo[]> {
+export async function getCompanyInfoGemini(input: string,type: string,isChatBot: boolean = false): Promise<CompanyInfo | CompanyInfo[]> {
   const payload = {
     contents: [
       {
         role: "user",
         parts: [
-          { text: `${AI_AGENT_SYSTEM_PROMT}\n\nUser input: ${input}` }
+          { text: `${isChatBot ? CHAT_BOT_SYSTEM_PROMT : AI_AGENT_SYSTEM_PROMT}\n\nUser input: ${input}` }
         ]
       }
     ]
@@ -29,6 +29,6 @@ export async function getCompanyInfoGemini(input: string,type: string): Promise<
 
   // Remove markdown formatting if present
   const cleanText = text.replace(/^```json\n?|\n?```$/g, "").trim();
-  console.log(`company info: ${JSON.parse(cleanText)}`);
-  return JSON.parse(cleanText);
+  console.log(`company info: ${isChatBot ? cleanText : JSON.parse(cleanText)}`);
+  return isChatBot ? cleanText : JSON.parse(cleanText);
 }

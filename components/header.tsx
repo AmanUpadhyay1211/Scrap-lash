@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
-import { Zap, Menu, X } from "lucide-react"
+import { Zap, Menu, X, Bot, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs"
@@ -14,6 +14,13 @@ const navigation = [
   { name: "Analytics", href: "/analytics" },
   { name: "Contact", href: "/contact" },
 ]
+
+const chatNavigation = {
+  name: "AI Chat",
+  href: "/chat",
+  icon: Bot,
+  special: true
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -51,6 +58,25 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
+            {isSignedIn && (
+              <Link
+                href={chatNavigation.href}
+                className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                  pathname.startsWith('/chat') 
+                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600' 
+                    : 'text-muted-foreground hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600'
+                } flex items-center gap-2`}
+              >
+                <motion.div
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-4 h-4"
+                >
+                  <Sparkles className="w-4 h-4" />
+                </motion.div>
+                {chatNavigation.name}
+              </Link>
+            )}
           </nav>
 
           {/* Desktop Actions */}
@@ -101,6 +127,20 @@ export function Header() {
                     {item.name}
                   </Link>
                 ))}
+              {isSignedIn && (
+                <Link
+                  href={chatNavigation.href}
+                  className={`text-sm font-medium transition-colors ${
+                    pathname.startsWith('/chat') 
+                      ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600' 
+                      : 'text-muted-foreground hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600'
+                  } flex items-center gap-2`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Sparkles className="w-4 h-4" />
+                  {chatNavigation.name}
+                </Link>
+              )}
               <div className="flex flex-col space-y-2 pt-4 border-t">
                 {isSignedIn ? (
                   <div className="flex justify-start">
