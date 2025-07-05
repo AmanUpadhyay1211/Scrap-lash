@@ -21,7 +21,7 @@ export async function POST(request: NextRequest, { params }: { params: { userId:
       { returnDocument: "after", upsert: true },
     )
 
-    return NextResponse.json(result.value)
+    return NextResponse.json(result?.value || { error: "Failed to update user credits" })
   } catch (error) {
     console.error("Failed to update user credits:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })

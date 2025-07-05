@@ -6,7 +6,7 @@ export async function GET(request: NextRequest, { params }: { params: { userId: 
     const { db } = await connectToDatabase()
     const users = db.collection("users")
 
-    let userData = await users.findOne({ userId: params.userId })
+    let userData : any = await users.findOne({ userId: params.userId })
 
     // Create default user data if not exists
     if (!userData) {

@@ -17,6 +17,7 @@ export default function AnalyticsPage() {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const { userData, analytics, loading } = useAppSelector((state) => state.user)
+  console.log(userData,"userData in analytics")
 
   useEffect(() => {
     if (isLoaded && !isSignedIn) {
