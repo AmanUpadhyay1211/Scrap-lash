@@ -1,17 +1,44 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CheckCircle, XCircle, Globe, Mail, Phone, MapPin, Users, Calendar, ExternalLink, Download } from "lucide-react"
+import { CheckCircle, XCircle, Globe, Mail, Phone, MapPin, Users, Calendar, ExternalLink, Download, Bot, Sparkles } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ScrapeRouteResponse } from "@/types/ScrapeRouteResponse"
+import { useUser } from "@clerk/nextjs"
+import { useRouter } from "next/navigation"
+import { useDispatch } from "react-redux"
+import { createNewChat } from "@/lib/redux/slices/chatSlice"
+import { AppDispatch } from "@/lib/redux/store"
 
 interface ResultsDisplayProps {
   results: ScrapeRouteResponse
 }
 
 export function ResultsDisplay({ results }: ResultsDisplayProps) {
+  const { user } = useUser()
+  const router = useRouter()
+  const dispatch = useDispatch<AppDispatch>()
+
+  const handleAIInsight = async () => {
+    if (!user || !results.success) return
+    
+    try {
+      const result = await dispatch(createNewChat({
+        userId: user.id,
+        title: `AI Analysis - ${new Date().toLocaleDateString()}`,
+        scrapeData: results.data
+      })).unwrap()
+      
+      if (result.success && result.data) {
+        router.push(`/chat/${user.id}/${result.data._id}`)
+      }
+    } catch (error) {
+      console.error('Failed to create chat:', error)
+    }
+  }
+
   const exportToCSV = (data: any[]) => {
     const headers = ["Company Name", "Website", "Emails", "Phones", "Address", "Description"]
     const csvContent = [
@@ -80,10 +107,16 @@ export function ResultsDisplay({ results }: ResultsDisplayProps) {
                 </p>
               </div>
             </div>
-            <Button onClick={() => exportToCSV(companies)} variant="outline" size="sm">
-              <Download className="w-4 h-4 mr-2" />
-              Export CSV
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button onClick={handleAIInsight} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0">
+                <Sparkles className="w-4 h-4 mr-2" />
+                AI Insight
+              </Button>
+              <Button onClick={() => exportToCSV(companies)} variant="outline" size="sm">
+                <Download className="w-4 h-4 mr-2" />
+                Export CSV
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
