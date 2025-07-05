@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Zap, Mail, Phone, MapPin, Twitter, Linkedin, Github } from "lucide-react"
+import { Mail, Phone, MapPin, Twitter, Linkedin, Github } from "lucide-react"
 
 const footerLinks = {
   product: [
@@ -32,9 +32,9 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { name: "Twitter", href: "https://twitter.com", icon: Twitter },
-  { name: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
-  { name: "GitHub", href: "https://github.com", icon: Github },
+  { name: "Twitter", href: "http://twitter.com/AmanUpa59504263?s=09", icon: Twitter },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/allthingsaman/", icon: Linkedin },
+  { name: "GitHub", href: "https://github.com/AmanUpadhyay1211", icon: Github },
 ]
 
 export function Footer() {
@@ -51,8 +51,12 @@ export function Footer() {
               viewport={{ once: true }}
             >
               <Link href="/" className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/60 rounded-lg flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-primary-foreground" />
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/0">
+                  <img
+                    src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                    alt="ScrapFlash Logo"
+                    className="w-8 h-8 object-contain"
+                  />
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                   Scrap⚡lash
@@ -67,15 +71,15 @@ export function Footer() {
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>support@webscraperpro.com</span>
+                  <a href="mailto:amanupadhyay1211@gmail.com" className="underline">amanupadhyay1211@gmail.com</a>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+91 8510832067</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  <span>San Francisco, CA</span>
+                  <span>New Delhi, INDIA</span>
                 </div>
               </div>
             </motion.div>

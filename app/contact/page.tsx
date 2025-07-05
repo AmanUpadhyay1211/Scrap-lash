@@ -87,7 +87,7 @@ export default function ContactPage() {
                   <Mail className="w-5 h-5 text-primary mt-1" />
                   <div>
                     <div className="font-medium">Email Support</div>
-                    <div className="text-sm text-muted-foreground">support@webscraperpro.com</div>
+                    <div className="text-sm text-muted-foreground">amanupadhyay1211@gmail.com</div>
                     <div className="text-xs text-muted-foreground mt-1">Response within 24 hours</div>
                   </div>
                 </div>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                   <Phone className="w-5 h-5 text-primary mt-1" />
                   <div>
                     <div className="font-medium">Phone Support</div>
-                    <div className="text-sm text-muted-foreground">+1 (555) 123-4567</div>
+                    <div className="text-sm text-muted-foreground">+91 8510832067</div>
                     <div className="text-xs text-muted-foreground mt-1">Mon-Fri, 9AM-6PM EST</div>
                   </div>
                 </div>
