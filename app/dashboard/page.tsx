@@ -40,6 +40,13 @@ export default function DashboardPage() {
     )
   }
 
+  // Show skeleton while Redux user data is loading
+  if (loading || !userData) {
+    // Dynamic import to avoid circular dependency
+    const Loading = require("./loading").default;
+    return <Loading />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       <Header />

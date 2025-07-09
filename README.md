@@ -11,7 +11,7 @@
   [![MongoDB](https://img.shields.io/badge/MongoDB-7.0-47A248?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/)
   [![Gemini AI](https://img.shields.io/badge/Gemini_AI-1.0-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev/)
   
-  [Live Demo](https://scrapflash.vercel.app) • [Documentation](https://docs.scrapflash.com) • [Report Bug](https://github.com/yourusername/scrapflash/issues)
+  [Live Demo](https://scrapflash.vercel.app) • [Documentation](https://github.com/AmanUpadhyay1211/Scrap-lash#readme) • [Report Bug](https://github.com/AmanUpadhyay1211/Scrap-lash)
 </div>
 
 ---
@@ -62,7 +62,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/scrapflash.git
+git clone https://github.com/AmanUpadhyay1211/Scrap-lash
 cd scrapflash
 
 # Install dependencies
@@ -311,7 +311,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ```bash
 # Fork and clone the repository
-git clone https://github.com/yourusername/scrapflash.git
+git clone https://github.com/AmanUpadhyay1211/Scrap-lash
 
 # Create a feature branch
 git checkout -b feature/amazing-feature
@@ -396,8 +396,8 @@ git push origin feature/amazing-feature
 ### Getting Help
 - 📧 **Email**: support@scrapflash.com
 - 💬 **Discord**: [Join our community](https://discord.gg/scrapflash)
-- 📖 **Documentation**: [docs.scrapflash.com](https://docs.scrapflash.com)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/scrapflash/issues)
+- 📖 **Documentation**: [docs.scrapflash.com](https://github.com/AmanUpadhyay1211/Scrap-lash#readme)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/AmanUpadhyay1211/Scrap-lash)
 
 ### Community
 - 🌟 **Star us on GitHub**
