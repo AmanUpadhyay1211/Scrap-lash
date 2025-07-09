@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     generator: 'v0.dev',
   icons: {
     icon: [
-      { url: "https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png", type: "image/png" }
+      { url: "https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png", type: "image/png" }
     ]
   }
 }
@@ -37,7 +37,7 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head>
           {/* Add favicon link */}
-          <link rel="icon" href="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png" type="image/png" />
+          <link rel="icon" href="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png" type="image/png" />
         </head>
         <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

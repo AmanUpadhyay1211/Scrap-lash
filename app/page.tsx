@@ -17,7 +17,7 @@ const features = [
   {
     icon: () => (
       <img
-        src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+        src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
         alt="ScrapFlash Logo"
         className="w-5 h-5 object-contain"
       />
@@ -127,7 +127,7 @@ export default function LandingPage() {
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
             <Badge variant="secondary" className="mb-4">
               <img
-                src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
                 alt="ScrapFlash Logo"
                 className="w-3 h-3 mr-1 object-contain"
               />
@@ -198,7 +198,7 @@ export default function LandingPage() {
                 <CardHeader>
                   <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-lg flex items-center justify-center mb-4">
                     <img
-                      src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                      src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
                       alt="ScrapFlash Logo"
                       className="w-6 h-6 object-contain"
                     />

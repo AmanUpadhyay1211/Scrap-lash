@@ -321,7 +321,7 @@ export default function ChatPage() {
                             <User className="w-4 h-4" />
                           ) : (
                             <Image
-                              src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                              src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
                               alt="AI Bot Mascot"
                               width={24}
                               height={24}
@@ -346,7 +346,7 @@ export default function ChatPage() {
                     <div className="flex items-end gap-2 max-w-[95%] sm:max-w-[85%] md:max-w-[70%]">
                       <div className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center">
                         <Image
-                          src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                          src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
                           alt="AI Bot Mascot"
                           width={24}
                           height={24}
@@ -371,7 +371,7 @@ export default function ChatPage() {
               <div className="text-center">
                 <div className="relative w-12 h-12 mx-auto mb-4">
                   <Image
-                    src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                    src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
                     alt="AI Bot Mascot"
                     fill
                     className="object-contain rounded-full bg-white dark:bg-neutral-900 p-1 border border-neutral-200 dark:border-neutral-700"

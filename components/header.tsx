@@ -38,7 +38,7 @@ export function Header() {
               className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/0"
             >
               <img
-                src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
+                src="https://res.cloudinary.com/amanupadhyay1211/image/upload/e_background_removal/c_crop,w_810,h_810,ar_1:1,f_png/v1751701111/ChatGPT_Image_Jul_5_2025_11_00_56_AM_u6inpq.png"
                 alt="ScrapFlash Logo"
                 className="w-8 h-8 object-contain"
               />
