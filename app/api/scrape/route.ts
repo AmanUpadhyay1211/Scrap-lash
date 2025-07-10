@@ -3,29 +3,6 @@ import { connectToDatabase } from "@/lib/mongodb"
 import { getCompanyInfoGemini } from "@/utils/getCompanyInfoByGemini"
 import { CompanyInfo } from "@/types/CompanyInfo"
 
-async function updateUserStats(userId: string) {
-  try {
-    const { db } = await connectToDatabase()
-    const users = db.collection("users")
-
-    await users.updateOne(
-      { userId },
-      {
-        $inc: {
-          successfulScrapes: 1,
-          credits: -1,
-        },
-        $set: {
-          lastActivity: new Date(),
-        },
-      },
-      { upsert: true },
-    )
-  } catch (error) {
-    console.error("Failed to update user stats:", error)
-  }
-}
-
 export async function POST(request: NextRequest) {
   try {
     const { input, type, userId } = await request.json()
@@ -45,11 +22,6 @@ export async function POST(request: NextRequest) {
 
     // Simulate scraping process
     const scrapedData : CompanyInfo | CompanyInfo[]= await getCompanyInfoGemini(input, type)
-
-    // Update user statistics if userId is provided
-    if (userId) {
-      await updateUserStats(userId)
-    }
 
     return NextResponse.json({
       success: true,

@@ -68,10 +68,12 @@ export const updateUserCredits = createAsyncThunk(
       },
       body: JSON.stringify({ creditsUsed }),
     })
+    const data = await response.json()
+    // console.log("response of updateUserCredits", data)
     if (!response.ok) {
       throw new Error("Failed to update credits")
     }
-    return response.json()
+    return data
   },
 )
 

@@ -42,7 +42,7 @@ export async function getCompanyInfoGemini(
 
   // Remove markdown formatting if present
   const cleanText = text.replace(/^```json\n?|\n?```$/g, "").trim();
-  console.log(`company info: ${isChatBot ? cleanText : JSON.parse(cleanText)}`);
+  // console.log(`company info: ${isChatBot ? cleanText : JSON.parse(cleanText)}`);
   return isChatBot ? cleanText : JSON.parse(cleanText);
 }
 
